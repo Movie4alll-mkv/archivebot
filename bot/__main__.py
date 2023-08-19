@@ -8,6 +8,7 @@ from .config import *
 from .worker import *
 from .devtools import *
 from .FastTelethon import *
+import os
 import math
 LOGS.info("Starting...")
 
