@@ -201,10 +201,17 @@ async def something():
                 wah = code(hehe)
                 nn = await e.edit(
                     "**🗜 Compressing...**",
-                    buttons=[
-                        [Button.inline("STATS", data=f"stats{wah}")],
-                        [Button.inline("CANCEL", data=f"skip{wah}")],
-                    ],
+                def on_button_click(self, button):
+    if button.data == "stats":
+        # Get the file name and size
+        file_name = button.extra_data["file_name"]
+        file_size = button.extra_data["file_size"]
+
+        # Calculate the percentage of the file that has been uploaded
+        percentage = 100 * button.progress / file_size
+
+        # Update the button text with the percentage
+        button.text = f"STATS: {percentage:.2f}%"
                 )
                 cmd = f"""ffmpeg -i "{dl}" {ffmpegcode[0]} "{out}" -y"""
                 process = await asyncio.create_subprocess_shell(
