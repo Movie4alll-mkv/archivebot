@@ -17,9 +17,6 @@ try:
 except Exception as er:
     LOGS.info(er)
 
-file_size = os.path.getsize(dl)
-total_size = 100 # Total size in percentage
-file_percentage = math.floor((file_size / total_size) * 100)
 
 ####### GENERAL CMDS ########
 
@@ -201,7 +198,10 @@ async def something():
                     "**🗜 Compressing...**",
                nn = await e.edit(
     "🗜 Compressing...",
-    buttons=[
+ file_size = os.path.getsize(dl)
+total_size = 100 # Total size in percentage
+file_percentage = math.floor((file_size / total_size) * 100)   
+ buttons=[
         [Button.inline(f"STATS ({file_percentage}%)", data=f"stats{wah}")],
         [Button.inline("CANCEL", data=f"skip{wah}")],
     ],
