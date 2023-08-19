@@ -200,7 +200,7 @@ async def something():
     "🗜 Compressing...",
  file_size = os.path.getsize(dl),
 total_size = 100, # Total size in percentage
-file_percentage = math.floor((file_size / total_size) * 100)   
+file_percentage = math.floor((file_size / total_size) * 100),  
  buttons=[
         [Button.inline(f"STATS ({file_percentage}%)", data=f"stats{wah}")],
         [Button.inline("CANCEL", data=f"skip{wah}")],
