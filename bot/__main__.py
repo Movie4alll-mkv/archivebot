@@ -199,7 +199,7 @@ async def something():
                nn = await e.edit(
     "🗜 Compressing...",
  file_size = os.path.getsize(dl),
-total_size = 100 # Total size in percentage
+total_size = 100, # Total size in percentage
 file_percentage = math.floor((file_size / total_size) * 100)   
  buttons=[
         [Button.inline(f"STATS ({file_percentage}%)", data=f"stats{wah}")],
