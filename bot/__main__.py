@@ -8,6 +8,7 @@ from .config import *
 from .worker import *
 from .devtools import *
 from .FastTelethon import *
+import math
 LOGS.info("Starting...")
 
 try:
@@ -15,6 +16,9 @@ try:
 except Exception as er:
     LOGS.info(er)
 
+file_size = os.path.getsize(dl)
+total_size = 100 # Total size in percentage
+file_percentage = math.floor((file_size / total_size) * 100)
 
 ####### GENERAL CMDS ########
 
@@ -72,13 +76,6 @@ async def _(e):
     if str(e.sender_id) not in OWNER and e.sender_id !=DEV:
         return e.reply("**Sorry You're not An Authorised User!**")
     await sysinfo(e)
-
-
-@bot.on(events.NewMessage(pattern="/leech"))
-async def _(e):
-    if str(e.sender_id) not in OWNER and e.sender_id !=DEV:
-        return e.reply("**Sorry You're not An Authorised User!**")
-    await dl_link(e)
 
 
 @bot.on(events.NewMessage(pattern="/help"))
@@ -201,18 +198,13 @@ async def something():
                 wah = code(hehe)
                 nn = await e.edit(
                     "**🗜 Compressing...**",
-                def on_button_click(self, button):
-    if button.data == "stats":
-        # Get the file name and size
-        file_name = button.extra_data["file_name"]
-        file_size = button.extra_data["file_size"]
-
-        # Calculate the percentage of the file that has been uploaded
-        percentage = 100 * button.progress / file_size
-
-        # Update the button text with the percentage
-        button.text = f"STATS: {percentage:.2f}%"
-                )
+               nn = await e.edit(
+    "🗜 Compressing...",
+    buttons=[
+        [Button.inline(f"STATS ({file_percentage}%)", data=f"stats{wah}")],
+        [Button.inline("CANCEL", data=f"skip{wah}")],
+    ],
+)
                 cmd = f"""ffmpeg -i "{dl}" {ffmpegcode[0]} "{out}" -y"""
                 process = await asyncio.create_subprocess_shell(
                     cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
